@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boeing and Airbus Planes</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .boeing-side {
+            flex: 1;
+            background-color: blue;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .airbus-side {
+            flex: 1;
+            background-color: red;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .plane-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .plane-list li {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .plane-info {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="boeing-side" onclick="showBoeingPlanes()">Boeing</div>
+        <div class="airbus-side" onclick="showAirbusPlanes()">Airbus</div>
+    </div>
+
+    <div class="container">
+        <div id="boeingPlanes" class="plane-list"></div>
+        <div id="airbusPlanes" class="plane-list"></div>
+    </div>
+
+    <div id="planeInfo" class="container plane-info"></div>
+
+    <div id="backButton" class="container back-button" onclick="goBack()">Back</div>
+
+    <script>
+        const boeingPlanes = [
+            { name: "Boeing 747", info: "The Boeing 747 is a large, long-range wide-body airliner." },
+            { name: "Boeing 777", info: "The Boeing 777 is a wide-body twin-engine airliner." },
+            { name: "Boeing 787", info: "The Boeing 787 is a long-range, mid-size wide-body airliner." }
+        ];
+
+        const airbusPlanes = [
+            { name: "Airbus A320", info: "The Airbus A320 is a narrow-body airliner." },
+            { name: "Airbus A380", info: "The Airbus A380 is a wide-body double-deck airliner." },
+            { name: "Airbus A350", info: "The Airbus A350 is a long-range, wide-body twin-engine airliner." }
+        ];
+
+        function showBoeingPlanes() {
+            document.getElementById("boeingPlanes").innerHTML = getPlaneList(boeingPlanes);
+            document.getElementById("boeingPlanes").style.display = "block";
+            document.getElementById("airbusPlanes").style.display = "none";
+            document.getElementById("planeInfo").style.display = "none";
+            document.getElementById("backButton").style.display = "none";
+        }
+
+        function showAirbusPlanes() {
+            document.getElementById("airbusPlanes").innerHTML = getPlaneList(airbusPlanes);
+            document.getElementById("boeingPlanes").style.display = "none";
+            document.getElementById("airbusPlanes").style.display = "block";
+            document.getElementById("planeInfo").style.display = "none";
+            document.getElementById("backButton").style.display = "none";
+        }
+
+        function showPlaneInfo(planeName, planeInfo) {
+            document.getElementById("planeInfo").innerHTML = `<h2>${planeName}</h2><p>${planeInfo}</p>`;
+            document.getElementById("boeingPlanes").style.display = "none";
+            document.getElementById("airbusPlanes").style.display = "none";
+            document.getElementById("planeInfo").style.display = "block";
+            document.getElementById("backButton").style.display = "block";
+        }
+
+        function getPlaneList(planes) {
+            let listItems = "";
+            for (let plane of planes) {
+                listItems += `<li onclick="showPlaneInfo('${plane.name}', '${plane.info}')">${plane.name}</li>`;
+            }
+            return `<ul class="plane-list">${listItems}</ul>`;
+        }
+
+        function goBack() {
+            document.getElementById("boeingPlanes").style.display = "none";
+            document.getElementById("airbusPlanes").style.display = "none";
+            document.getElementById("planeInfo").style.display = "none";
+            document.getElementById("backButton").style.display = "none";
+        }
+    </script>
+</body>
+</html>
